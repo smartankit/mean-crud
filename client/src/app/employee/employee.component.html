@@ -1,0 +1,103 @@
+<div class="row">
+  <div class="col s12">
+    <div class="card">
+      <div class="card-content">
+        <div class="row">
+          <div class="col s5">
+            <form #employeeForm="ngForm" (ngSubmit)="onSubmit(employeeForm)">
+              <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="employee._id">
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="text" name="name" #name="ngModel" [(ngModel)]="employee.name"
+                    placeholder="Enter full name" required>
+                  <label>Name :
+                    <label class="red-text">*</label>
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="text" name="position" required #name="ngModel" [(ngModel)]="employee.position"
+                    placeholder="Eg : Snr. Developer">
+                  <label>Position :
+                    <label class="red-text">*</label>
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="text" name="office" #name="ngModel" [(ngModel)]="employee.office"
+                    placeholder="Enter office location" required>
+                  <label>Office :
+                    <label class="red-text">*</label>
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="text" name="salary" #name="ngModel" [(ngModel)]="employee.salary"
+                    placeholder="Salary per annum" required>
+                  <label>Salary :
+                    <label class="red-text">*</label>
+                  </label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                <div class="input-field col s4">
+                  <span class="btn btn-file">
+                    <i class="material-icons left">cloud_upload</i>
+                    Import<input type="file" #inputFile  (change)="importFile($event)">
+
+                  </span>
+
+                  <button class="btn btn-custom right" type="button" (click)="export()">Export</button>
+                </div>
+
+                <div class="input-field col s8">
+                  <span class="btn btn-file">
+                    <button class="btn btn-custom right" type="button" (click)="resetForm(employeeForm)">Reset</button>
+                  </span>
+                  <button class="btn btn-custom right" type="submit" [disabled]="!employeeForm.valid">Submit</button>
+                </div>
+                <a download="filename" target="_blank" href="/assets/samplefile.csv">
+                  Click here to download Sample File
+                </a>
+              </div>
+            </div>
+
+            </form>
+          </div>
+          <div class="col s7">
+            <table class="responsive-table highlight">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Position</th>
+                  <th>Office</th>
+                  <th></th>
+                </tr>
+              </thead>
+
+              <tr *ngFor="let emp of employees">
+                <td>{{emp.name}}</td>
+                <td>{{emp.position}}</td>
+                <td>{{emp.office}}</td>
+                <td>
+                  <a class="action-btn" (click)="onEdit(emp)">
+                    <i class="material-icons">edit</i>
+                  </a>
+                  <a class="action-btn" (click)="onDelete(emp._id,employeeForm)">
+                    <i class="material-icons">delete</i>
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
